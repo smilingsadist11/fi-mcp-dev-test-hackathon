@@ -51,6 +51,7 @@ func main() {
 }
 
 func dummyHandler(_ context.Context, _ mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	fmt.Print("Dummy handler called")
 	return mcp.NewToolResultText("dummy handler"), nil
 }
 
