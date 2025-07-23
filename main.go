@@ -6,6 +6,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
@@ -43,7 +44,10 @@ func main() {
 	httpMux.Handle("/mcp/", streamableServer)
 	httpMux.HandleFunc("/mockWebPage", webPageHandler)
 	httpMux.HandleFunc("/login", loginHandler)
-	port := pkg.GetPort()
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080" // fallback
+	}
 	log.Println("starting server on port:", port)
 	if servErr := http.ListenAndServe(fmt.Sprintf(":%s", port), httpMux); servErr != nil {
 		log.Fatalln("error starting server", servErr)

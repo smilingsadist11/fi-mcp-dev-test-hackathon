@@ -1,0 +1,4 @@
+.git
+node_modules
+# test_data_dir/
+*.md
